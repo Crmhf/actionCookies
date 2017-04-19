@@ -1,0 +1,32 @@
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>angularjs-cookie</title>
+    <script type="text/javascript" src="3rd/angular/1.2.28/angular.js"></script>
+    <script type="text/javascript" src="3rd/angular/1.2.28/cookies/angular-cookies.js"></script>
+</head>
+<body>
+<form name="form1" ng-controller="form1">
+    <input type="text" name="input1" value="" ng-model="input1" />
+    <input type="button" value="保存cookie" ng-click="saveCookie()" />
+    <input type="button" value="删除cookie" ng-click="removeCookie()" />
+    <script>
+        var app = angular.module('myApp',['ngCookies']);
+        app.controller("form1",function($cookieStore,$scope){
+            if($cookieStore.get("a1")) {
+                $scope.input1 = $cookieStore.get("a1");
+                alert("加载cookie成功！");
+            }
+            $scope.saveCookie = function() {
+                $cookieStore.put("a1",$scope.input1);
+                alert("保存cookie成功！");
+            };
+            $scope.removeCookie = function() {
+                $cookieStore.remove("a1");
+                alert("删除cookie成功！");
+            };
+        });
+    </script>
+</form>
+</body>
+</html>
